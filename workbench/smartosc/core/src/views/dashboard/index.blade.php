@@ -1,0 +1,1 @@
+@extends(Config::get('core::views.master'))
