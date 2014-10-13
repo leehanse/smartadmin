@@ -119,7 +119,7 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-                'Smartosc\Core\CoreServiceProvider',
+                'Smartcms\Core\CoreServiceProvider',
                 'Cartalyst\Sentry\SentryServiceProvider',
                 'Intervention\Image\ImageServiceProvider',
 	),
