@@ -16,10 +16,6 @@ use Hash;
 
 class DashboardController extends BaseController
 {
-    public function indexDashboard(){
-        return '<h1>Dash Board</h1>';
-    }
-    
     /**
     * Index loggued page
     */
@@ -27,7 +23,6 @@ class DashboardController extends BaseController
     {
         $this->layout = View::make(Config::get('core::views.dashboard-index'));
         $this->layout->title = trans('core::all.titles.index');
-        $this->layout->breadcrumb = Config::get('core::breadcrumbs.dashboard');
     }
 
     /**

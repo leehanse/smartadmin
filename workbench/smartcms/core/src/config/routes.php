@@ -25,7 +25,7 @@ return array(
     ),
     'indexDashboard' => array(
         'url'            => '/dashboard',
-        'action'         => 'DashboardController@indexDashboard',
+        'action'         => 'DashboardController@getIndex',
         'login'          => 1,
     ),
     'logout'        => array(

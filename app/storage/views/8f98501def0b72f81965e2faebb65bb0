@@ -1,0 +1,134 @@
+<!-- start: TABLE WITH IMAGES PANEL -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <i class="clip-users-2"></i>
+        <b>Total : <?php echo $datas['users']->getTotal(); ?> users</b>
+        <div class="panel-tools">
+            <?php if($currentUser->hasAccess('delete-user')): ?>
+            <a id="delete-item" class="btn btn-danger btn-sm" data-route-delete="<?php echo URL::route('deleteUsers'); ?>"><?php echo trans('core::all.delete'); ?></a>
+            <?php endif; ?>
+
+            <?php if($currentUser->hasAccess('create-user')): ?>
+            <a class="btn btn-info btn-new btn-sm" href="<?php echo URL::route('newUser'); ?>">Create User</a>
+            <?php endif; ?>
+        </div>                    
+    </div>
+    <div class="panel-body">
+        <div class="pagination-box">
+            <?php 
+                $arrPaginationAppend = array();
+                echo $datas['users']->appends($arrPaginationAppend)->links();
+            ?>   
+        </div>        
+        <table class="table table-striped table-bordered table-hover" id="sample-table-2">
+            <thead>
+                <tr>
+                    <?php if($currentUser->hasAccess('delete-user')): ?>
+                    <th class="center">
+                        <div>
+                            <input type="checkbox" class="check-all">
+                        </div>
+                    </th>
+                    <?php endif; ?>    
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>First Name</th>
+                    <th>Middle name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Type</th>
+                    <!--<th>Branch</th>-->
+                    <th>Brand</th>
+                    <th>Active</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($datas['users'] as $user): ?>
+                <?php
+                    $throttle = $throttle = Sentry::findThrottlerByUserId($user->getId());
+                ?>                
+                <tr>
+                    <?php if($currentUser->hasAccess('delete-user')): ?>
+                    <td style="text-align: center;">
+                        <input type="checkbox" data-user-id="<?php echo $user->getId();; ?>">
+                    </td>
+                    <?php endif; ?>     
+                    <td><?php echo $user->getId();; ?></td>
+                    <td><?php echo $user->username; ?></td>
+                    <td><?php echo $user->first_name; ?></td>
+                    <td><?php echo $user->middle_name; ?></td>
+                    <td><?php echo $user->last_name; ?></td>
+                    <td>
+                        <a rel="nofollow" href="javascript:void(0);">
+                            <?php echo $user->email; ?>            
+                        </a>                        
+                    </td>
+                    <td>
+                        <?php 
+                            $arr_group = array();
+                            $tmp_arr_groups = $user->getGroups()->toArray();
+                            if(count($tmp_arr_groups)){
+                                foreach($tmp_arr_groups as $group){
+                                    $arr_group[] = $group['name'];
+                                }                            
+                            }
+                        ?>
+                        <?php echo implode(',',$arr_group); ?>                                            
+                    </td>
+                    <!--
+                    <td>
+                        <?php 
+                              if($user->branch_id){
+                                  $branch = Branch::find($user->branch_id);
+                                  if($branch) echo $branch->name;
+                              }
+                        ?>
+                    </td>
+                    -->
+                    <td>
+                        <?php 
+                              if($user->branch_id){
+                                  $branch = Branch::find($user->branch_id); 
+                                  if($branch && isset($branch->brand_id) && $branch->brand_id){
+                                      $brand = Brand::find($branch->brand_id);
+                                      if($brand)
+                                          echo $brand->name;
+                                  }
+                              }
+                        ?>
+                    </td>
+                    <td>
+                        <?php echo $user->isActivated() ? trans('core::all.yes') : trans('core::all.no'); ?>
+
+                    </td>
+                    <td class="center" width="100">
+                        <div>
+                            <?php if($currentUser->hasAccess('update-user-info')): ?>
+                                <a class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit" href="<?php echo URL::route('showUser', $user->getId()); ?>"><i class="fa fa-edit"></i></a>
+                            <?php endif; ?>    
+                            <?php if($currentUser->hasAccess('delete-user')): ?>
+                            <a href="javascript:void(0);" class="btn-remove btn btn-xs btn-bricky tooltips" data-placement="top" data-original-title="Remove"><i class="fa fa-times fa fa-white"></i></a>
+                            <?php endif; ?>
+                            <?php if($currentUser->hasAccess('user-active-management')): ?>                            
+                                <?php if($user->isActivated()): ?>
+                                    <a href="javascript:void(0);" class="activate-user btn btn-xs btn-green tooltips" data-placement="top" data-original-title="Deactive"><i class="clip-locked"></i></a>
+                                <?php else: ?>
+                                    <a href="#" class="activate-user btn btn-xs btn-green tooltips" data-placement="top" data-original-title="Active"><i class="clip-unlocked"></i></a>
+                                <?php endif; ?>                            
+                            <?php endif; ?>    
+                        </div>
+                    </td>
+                </tr>   
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <div class="pagination-box">
+            <?php 
+                $arrPaginationAppend = array();
+                echo $datas['users']->appends($arrPaginationAppend)->links();
+            ?>   
+        </div>        
+    </div>
+</div>
+<!-- end: TABLE WITH IMAGES PANEL -->
