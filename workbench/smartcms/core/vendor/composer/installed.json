@@ -7,12 +7,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/illuminate/support.git",
-            "reference": "4831699d6bcddd766e3cebbd8279976854d37027"
+            "reference": "888e81e77a675e4848d5b8375a9e68d1b9de3de9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/illuminate/support/zipball/4831699d6bcddd766e3cebbd8279976854d37027",
-            "reference": "4831699d6bcddd766e3cebbd8279976854d37027",
+            "url": "https://api.github.com/repos/illuminate/support/zipball/888e81e77a675e4848d5b8375a9e68d1b9de3de9",
+            "reference": "888e81e77a675e4848d5b8375a9e68d1b9de3de9",
             "shasum": ""
         },
         "require": {
@@ -22,7 +22,7 @@
             "jeremeamia/superclosure": "~1.0.1",
             "patchwork/utf8": "1.1.*"
         },
-        "time": "2014-09-27 01:17:10",
+        "time": "2014-11-23 23:01:17",
         "type": "library",
         "extra": {
             "branch-alias": {

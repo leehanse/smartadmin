@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'smartadmin',
 			'username'  => 'root',
-			'password'  => 'admin123',
+			'password'  => 'f0r1xus@',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
